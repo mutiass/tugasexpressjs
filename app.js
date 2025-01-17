@@ -9,11 +9,11 @@ app.use('/portosqlmutia', express.static(path.join(__dirname, 'portosqlmutia')))
 app.use('/portosqlmutia2', express.static(path.join(__dirname, 'portosqlmutia2')));
 
 app.use('/portosqlmutia', (req, res) => {
-    res.sendFile(path.join(__dirname, 'portosqlmutia', 'index.html'));
+    res.sendFile(path.join(__dirname, 'portosqlmutia'));
 });
 
 app.use('/portosqlmutia2', (req, res) => {
-    res.sendFile(path.join(__dirname, 'portosqlmutia2', 'index.html'));
+    res.sendFile(path.join(__dirname, 'portosqlmutia2'));
 });
 
 
