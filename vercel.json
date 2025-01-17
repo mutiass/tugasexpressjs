@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/portosqlmutia", "destination": "/portosqlmutia/index.html" },
+    { "source": "/portosqlmutia2", "destination": "/portosqlmutia2/index.html" }
+  ]
+}
