@@ -1,27 +1,14 @@
-// app.js
-const express = require('express');
-const path = require('path');
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware untuk mencatat log di server
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-  next();
-});
-
-// Middleware untuk file statis
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/portosqlmutia', express.static(path.join(__dirname, 'portosqlmutia')));
-app.use('/portosqlmutia2', express.static(path.join(__dirname, 'portosqlmutia2')));
-
-// Route default
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server berjalan di: http://localhost:${PORT}`);
-});
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/portosqlmutia/(.*)", "dest": "app.js" },
+    { "src": "/portosqlmutia2/(.*)", "dest": "app.js" },
+    { "src": "/(.*)", "dest": "app.js" }
+  ]
+}
