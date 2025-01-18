@@ -1,12 +1,27 @@
-{
-  "rewrites": [
-    { "source": "/portosqlmutia", "destination": "/portosqlmutia/index.html" },
-    { "source": "/portosqlmutia2", "destination": "/portosqlmutia2/index.html" }
-  ],
-  "static": {
-    "folders": [
-      "portosqlmutia",
-      "portosqlmutia2"
-    ]
-  }
-}
+// app.js
+const express = require('express');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware untuk mencatat log di server
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
+
+// Middleware untuk file statis
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/portosqlmutia', express.static(path.join(__dirname, 'portosqlmutia')));
+app.use('/portosqlmutia2', express.static(path.join(__dirname, 'portosqlmutia2')));
+
+// Route default
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server berjalan di: http://localhost:${PORT}`);
+});
